@@ -4,22 +4,39 @@ import { useState } from "react";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
+import { useRouter } from "next/dist/client/router";
 
 
 function header() {
     const [searchInput, setSearchInput] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const router = useRouter();
 
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,
         key: "selection"
     }
+
+    const resetInput = () => {
+        setSearchInput("");
+    }
+
     const handleSelect = (ranges) => {
-        console.log(ranges);
         setStartDate(ranges.selection.startDate);
         setEndDate(ranges.selection.endDate);
+    }
+
+    const searchPath = () => {
+        router.push({
+            pathname: "/search",
+            query: {
+                location: searchInput,
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+            }
+        });
     }
 
 
@@ -27,8 +44,12 @@ function header() {
         <header className="sticky top-0 z-50 py-3 px-5 grid grid-cols-3 bg-white shadow-md md:px-10">
             
             {/* Left */}
-            <div className="relative flex items-center h-10 cursor-pointer
-            my-auto">
+            <div 
+                onClick={() => router.push("/")}
+                className="relative flex items-center h-10 cursor-pointer
+                my-auto" 
+                
+            >
                 <Image 
                     src="https://links.papareact.com/qd3"
                     layout="fill"
@@ -65,7 +86,18 @@ function header() {
                         onChange={handleSelect}
                         rangeColors = {["#5db24a"]}
                     />
+                    <div className="flex">
+                        <button 
+                            onClick = {resetInput}
+                            className="flex-grow text-gray-500">Cancel
+                        </button>
+                        <button 
+                            onClick = {searchPath}
+                            className="flex-grow text-red-400">Search
+                        </button>
+                    </div>
                 </div>
+                
             }
             
         </header>

@@ -80,7 +80,6 @@ export async function getStaticProps() {
     props: {
       exploreData,
       cardsData,
-
     },
   };
 }
