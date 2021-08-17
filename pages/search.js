@@ -34,6 +34,12 @@ function Search( {searchResults} ) {
                     {searchResults?.map( (item) => (
                         <InforCard 
                             img={item.img}
+                            location={item.location}
+                            title={item.title}
+                            description={item.description}
+                            star= {item.star}
+                            price={item.price}
+                            total={item.total}
                         />
                     ))}
                     
