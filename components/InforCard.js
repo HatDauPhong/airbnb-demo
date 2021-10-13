@@ -25,8 +25,8 @@ function InforCard({img, location, title, description, star, price, total}) {
                 
                 <div className="flex justify-between items-end">
                     <div className="flex items-center">
-                        <StarIcon className="h-4 md:h7 text-red-400" />
-                        <p className="text-xs md:text-base">{star}</p>
+                        <StarIcon className="h-4 md:h-7 text-red-400" />
+                        <p className="text-xs md:text-lg">{star}</p>
                     </div>
                     <div className="right">
                         <p className="text-xs md:text-2xl font-semibold">{price}</p>
